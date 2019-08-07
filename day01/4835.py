@@ -15,3 +15,5 @@ for idx in range(tc):
         lists.append(sum)
         result = max(lists) - min(lists)
     print('#{} {}'.format(idx+1, result))
+
+    # 앞의 것을 빼고 뒤의 것을 더하는 방법도 생각해 볼 수 있음

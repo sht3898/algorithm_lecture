@@ -1,3 +1,3 @@
-
-for x in input().split():
-    n.append(int(x))
+a = [([0]*10)]*5
+print(a)
+print(len(a[0]))
