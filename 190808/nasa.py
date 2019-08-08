@@ -10,10 +10,10 @@ for t in range(tc):
     # result = []
     result_list = []
     answer = ''
+
     while len(arr2) > 0:
         result_list.append(arr2[:2])
         arr2 = arr2[2:]
-    print(result_list)
 
     for i in range(len(result_list)):
         if arr.count(result_list[i][0]) % 2:
@@ -22,10 +22,16 @@ for t in range(tc):
             last = result_list[i]
 
     result = first
-    for i in range(len(result_list)):
+
+    i = 0
+    while i < len(result_list):
         if result_list[i][0] == result[len(result)-1]:
             result += result_list[i]
+            i = -1
+        i += 1
 
-    print(result_list)
-    print(result)
-    print()
+    for num in result:
+        answer += str(num) + ' '
+    answer = answer[:-1]
+
+    print('#{} {}'.format(t+1, answer))
