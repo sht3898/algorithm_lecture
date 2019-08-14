@@ -7,7 +7,6 @@ for t in range(tc):
     n = int(input())
     arr = list(map(int, input().split()))
     arr2 = arr
-    # result = []
     result_list = []
     answer = ''
 

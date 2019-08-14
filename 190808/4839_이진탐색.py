@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open('bin.txt', 'r')
 
+# set은 이진탐색트리, 해싱 => 더 빨라질수 있음
 
 def binary_search(page, target):
     low = 1

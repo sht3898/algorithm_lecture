@@ -3,7 +3,6 @@ sys.stdin = open('bingo.txt', 'r')
 
 numbers = []
 speaks = []
-count = 0
 bingo = 0
 result_list = [[0] * 5 for _ in range(5)]
 result = []
@@ -25,12 +24,12 @@ for speak in speak_list:
                 result.append([idx, idx2])
 
 for couple in result:
-    print(couple)
-    count += 1
+    count = 0
     result_list[couple[0]][couple[1]] = 1
     for idx in range(5):
         if sum(result_list[idx]) == 5:
             bingo += 1
+        count += 1
 
     for idx in range(5):
         same_list = []
@@ -39,6 +38,7 @@ for couple in result:
                 same_list.append(numbers[idx][idx2])
         if sum(same_list) == 5:
             bingo += 1
+        count += 1
 
     for idx in range(5):
         height_list = []
@@ -46,6 +46,7 @@ for couple in result:
             height_list.append(numbers[idx2][idx])
         if sum(height_list) == 5:
             bingo += 1
+        count += 1
 
     if bingo == 3:
         print(count)
