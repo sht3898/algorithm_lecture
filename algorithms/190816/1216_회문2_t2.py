@@ -4,6 +4,7 @@ sys.stdin = open('회문2.txt', 'r')
 for tc in range(1, 11):
     N = int(input()) # 회문길이
     arr = [input() for _ in range(100)]
+    print(arr)
 
     ans = 1 # 지금까지 찾은 최대 길이
     for idx in range(100):

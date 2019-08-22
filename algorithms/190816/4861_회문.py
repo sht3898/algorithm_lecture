@@ -20,7 +20,6 @@ for t in range(tc):
     for a in range(n):
         pass
 
-
     for y in range(m):
         word = ''
         for x in range(n):
