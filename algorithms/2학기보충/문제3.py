@@ -1,39 +1,28 @@
 import sys; sys.stdin = open('문제3.txt', 'r')
-import pprint
+
+dx = [0, 0, 1, -1, 1, -1, 1, -1]
+dy = [1, -1, 0, 0, 1, 1, -1, -1]
+
+
+def dfs(x, y):
+    visit[x][y] = 1
+    for i in range(8):
+        nx, ny = x + dx[i], y + dy[i]
+        if 0 <= nx < n and 0 <= ny < n and not visit[nx][ny] and arr[nx][ny]:
+            dfs(nx, ny)
+
 
 t = int(input())
 
-def dfs(a, b):
-    x, y = i[a], i[b]
-    count = 0
-    if not visit[x][y]:
-        visit[x][y] = True
-    for direction in range(3):
-        d_x, d_y = x + dx[direction], y + dy[direction]
-        if 0 <= d_x < n and 0 <= d_y < n and not visit[d_x][d_y] and island[d_x][d_y] != 0:
-            x, y = d_x, d_y
-            dfs(x, y)
-        elif 0 <= d_x < n and 0 <= d_y < n and not visit[d_x][d_y] and island[d_x][d_y] != 0:
-            count += 1
-    return count
-
-
-dx = [1,1,0]
-dy = [0,1,1]
-
 for tc in range(1, t+1):
     n = int(input())
-    visit = [[False]*n for _ in range(n)]
-    island = [list(map(int, input().split())) for _ in range(n)]
-    stack = []
+    arr = [list(map(int, input().split())) for _ in range(n)]
+    visit = [[0] * n for _ in range(n)]
     count = 0
+    for i in range(n):
+        for j in range(n):
+            if not visit[i][j] and arr[i][j]:
+                count += 1
+                dfs(i, j)
 
-    for x in range(n):
-        for y in range(n):
-            if island[x][y] != 0:
-                stack.append([x, y])
-    for i in stack:
-        x, y = i[0], i[1]
-        for j in range(3):
-            d_x, d_y = x + dx[j], y + dy[j]
-            if d_x
+    print('#{} {}'.format(tc, count))
