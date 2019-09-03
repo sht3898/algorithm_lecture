@@ -1,36 +1,34 @@
-import sys
-sys.stdin = open('회문.txt', 'r')
+import sys; sys.stdin = open('회문.txt', 'r')
 
-tc = int(input())
+T = int(input())
 
-for t in range(tc):
-    m, n = map(int, input().split())
-    words = []
-    reverse = []
-    result = ''
-    wd = ''
+for TC in range(1, T+1):
+    N, M = map(int, input().split())
+    arr = [list(input()) for _ in range(N)]
+    switch = 0
 
-    for _ in range(m):
-        words.append(input())
+    for i in range(N):
+        if switch:
+            break
+        for j in range(N-M+1):
+            temp = ''
+            for k in range(M):
+                temp += arr[i][j+k]
+            if temp == temp[::-1]:
+                result = temp
+                switch = 1
+                break
 
-    print(words)
-    for w in words:
-        wd += w
-    print(wd)
-    for a in range(n):
-        pass
+    for j in range(N):
+        if switch:
+            break
+        for i in range(N-M+1):
+            temp = ''
+            for k in range(M):
+                temp += arr[i+k][j]
+            if temp == temp[::-1]:
+                result = temp
+                break
 
-    for y in range(m):
-        word = ''
-        for x in range(n):
-            word += words[x][y]
-        reverse.append(word)
-
-    for idx in words:
-        if idx == idx[::-1]:
-            result = idx
-    for idx2 in reverse:
-        if idx2 == idx2[::-1]:
-            result = idx2
-
-    print('#{} {}'.format(t+1, result))
+    print('#{} '.format(TC), end='')
+    print(result)
