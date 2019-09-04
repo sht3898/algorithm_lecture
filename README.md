@@ -167,6 +167,32 @@
 ### Solving Club
 
 * [1258_행렬찾기](./algorithms/190902_List/1258_행렬찾기.py)
+
+  ```python
+  # 선생님 방법
+  ans = []
+  
+  for i in range(N):
+      for j in range(N):
+          if arr[i][j] == 0: continue
+          
+          r, c = i, 0		# r: 행, c: 열
+          while r < N and arr[r][j]:
+              c = j
+              while c < N and arr[r][c]:
+                  arr[r][c] = 0
+                  c += 1
+              r += 1
+              
+          ans.append((r - i, c - j))
+          
+  ans.sort(key= lambda a: (a[0] * a[1], a[0]))
+  # lambda를 사용하면 정렬할 때 순위를 지정할 수 있음
+  # a[0] * a[1]가 1순위, a[0]가 2순위
+  ```
+
+  
+
 * [6485_버스노선]
 
 
@@ -178,3 +204,214 @@
 * [5120_암호](./algorithms/190902_List/5120_암호.py)
 * [5122_수열편집]
 
+
+
+### BOJ
+
+* [1759 암호만들기](./algorithms/190902_List/1759_암호만들기.py)
+
+  6개 중 4개 골라내면 조합, 4개 골라 순서대로 나열하면 순열
+
+  ```python
+  # 선생님 풀이
+  # 6C4의 원소들을 모두 출력
+  # 부분 집합으로 풀이
+  
+  # 4 6
+  # a t c i s w
+  import sys; sys.stdin = open('1759_input.txt', 'r')
+  
+  pwd = []	# pwd: 전역 변수, 부분 집합에 들어갈 원소 저장
+  def backtrack(k):	# k: 넣을 원소의 인덱스
+      if len(pwd) == L:	# 추가하는 원소가 L개가 되면 더 이상 찾을 필요 없음
+          print(pwd)
+          return
+      if k == C: return
+      
+      pwd.append(arr[k])
+  	backtrack(k+1)	# k번째 요소를 포함하는 경우
+      pwd.pop()
+      backtrack(k+1)	# k번째 요소를 포함하지 않는 경우
+  L, C = map(int, input().split())
+  arr = input().split()
+  arr.sort()
+  
+  backtrack(0)
+  ```
+
+  ```python
+  # 모음 자음 출력
+  
+  # 4 6
+  # a t c i s w
+  import sys; sys.stdin = open('1759_input.txt', 'r')
+  
+  pwd = []	# pwd: 전역 변수, 부분 집합에 들어갈 원소 저장
+  alpha = ('a', 'e', 'i', 'o', 'u')
+  def backtrack(k, mo, ja):	# k: 넣을 원소의 인덱스, mo: 모음, ja: 자음
+      if len(pwd) == L:	# 추가하는 원소가 L개가 되면 더 이상 찾을 필요 없음
+          print(pwd)
+          return
+      if k == C: return
+      
+      pwd.append(arr[k])
+      a = b = 0
+      if arr[k] in alpha: a = 1
+      else: b = 1
+  	backtrack(k+1, mo + a, ja + b)	# k번째 요소를 포함하는 경우
+      pwd.pop()
+      backtrack(k+1, mo, ja)	# k번째 요소를 포함하지 않는 경우
+  L, C = map(int, input().split())
+  arr = input().split()
+  arr.sort()
+  
+  backtrack(0, 0, 0)
+  ```
+
+  ```python
+  # 조합 생성
+  # 3C2
+  
+  # 중복 순열 3Pi2
+  # 순열 3P2
+  # 조합 3C2
+  # 중복 조합 3H2
+  
+  arr = 'ABC'; N = len(arr)
+  for i in range(N):
+      for j in range(N):
+          if i == j: continue
+          print(arr[i], arr[j])
+  ```
+
+  ```python
+  # 조합 생성 방법, 이전에 했던 것은 출력됐기 때문에 할 필요 없음
+  arr = 'ABC';N = len(arr)
+  
+  for i in range(N):
+      for j in range(i + 1, N):
+          print(arr[i], arr[j])
+  ```
+
+  ```python
+  # 중복 조합
+  
+  arr = 'ABC';N = len(arr)
+  
+  for i in range(N):
+      for j in range(i, N):
+          print(arr[i], arr[j])
+  ```
+
+  ```python
+  # 5C3
+  
+  arr = 'ABCDE';N = len(arr)
+  
+  for i in range(N):
+      for j in range(i + 1, N):
+          for k in range(j + 1, N):
+          	print(arr[i], arr[j], arr[k])
+  ```
+
+  ```python
+  # 5C3 재귀
+  arr = 'ABCDE'; N = len(arr)
+  N, R = 5, 3
+  choose = []
+  
+  def comb(k, start):		# k: 지금까지 선택한 개수, start: 반복문의 시작값
+      if K == R:
+          return
+      for i in range(start, N):
+          choose.append(arr[i])
+          # i번째 정보를 저장
+          comb(k + 1, i + 1)
+          choose.pop()
+  
+  comb(0, 0)
+  ```
+
+  ```python
+  # 5H3(중복조합) 재귀
+  arr = 'ABCDE'; N = len(arr)
+  N, R = 5, 3
+  choose = []
+  
+  def comb(k, start):		# k: 지금까지 선택한 개수, start: 반복문의 시작값
+      if K == R:
+          return
+      for i in range(start, N):
+          choose.append(arr[i])
+          # i번째 정보를 저장
+          comb(k + 1, i)	# i번도 가능하게 포함시킴
+          choose.pop()
+  
+  comb(0, 0)
+  ```
+
+  
+
+
+
+## 190904_Study
+
+### BOJ
+
+* [1769_암호만들기](./algorithms/190904_Study/1697_숨바꼭질.py)
+
+* [1697_숨바꼭질](./algorithms/190904_Study/1697_숨바꼭질.py)
+
+  ```python
+  # dfs로 풀면 시간이 초과되기 때문에 bfs로 풀어야함
+  def bfs(v):
+      visit = [0] * 100001
+      q = [v]
+      cnt = 0
+      state = 0
+  
+      while q:
+          for _ in range(len(q)):
+              v = q.pop(0)
+              if not visit[v]:
+                  visit[v] = 1
+                  if v == K:
+                      state = 1
+                      break
+                  if v - 1 >= 0:
+                      q.append(v - 1)
+                  if v + 1 <= 100000:
+                      q.append(v + 1)
+                  if v * 2 <= 100000:
+                      q.append(v * 2)
+  
+          if state:
+              print(cnt)
+              break
+          cnt += 1
+  
+  
+  N, K = map(int, input().split())
+  bfs(N)
+  ```
+
+  ```python
+  # dfs ver
+  N, K = map(int, input().split())
+  D = [100000] * 100001
+  
+  def find(x):
+      print(x)
+  	if D[x] >= D[K]: return
+      
+  ```
+
+* [14501_퇴사](./algorithms/190904_Study/14501_퇴사.py)
+
+* [5427_불](./algorithms/190904_Study/5427_불.py)
+
+  ```python
+  
+  ```
+
+  

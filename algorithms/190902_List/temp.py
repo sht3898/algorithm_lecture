@@ -1,24 +1,29 @@
-import sys; sys.stdin = open('5120_input.txt', 'r')
-from LinkedList import Node, List
-
-T = int(input())
-
-for TC in range(1, T+1):
-    N, M, K = map(int, input().split())     # N: 숫자 개수, M: 지정 위치로부터의 칸, K:반복횟수
-    arr = list(map(int, input().split()))
-    print(N, M, K)
-    print(arr)
-    for i in range(1, K+1):
-        if i*M < N:
-            left, right = arr[i*M-1], arr[i*M]
-            arr.insert(i*M, left+right)
-        else:
-            left, right = arr[(i*M) % N-1], arr[(i*M) % N]
-            if i*M == N:
-                arr.append(left+right)
-            else:
-                arr.insert((i*M) % N, left+right)
-        N += 1
-        print(i, i*M, len(arr), arr)
-    # print(arr[::-1])
-    print()
+import collections
+def bfs(N):  # 수빈위치
+   global K  # 목표위치
+   # K = 21
+   if N == K:
+       return 0
+   if N == 0:
+       return K
+   visit[N] = True
+   dq = collections.deque()
+   dq.append(N)
+   while dq:
+       cur = dq.popleft()  # 수빈위치
+       job[2] = cur
+       for i in range(3):
+           if 0 <= cur + job[i] < 100001 and not visit[cur + job[i]]:
+               if cur + job[i] == K:
+                   return D[cur] + 1
+               visit[cur + job[i]] = True
+               dq.append(cur + job[i])
+               D[cur + job[i]] = D[cur] + 1
+#
+# N, K = map(int, input().split())  # N:현재숫자, K:목표숫자
+# N, K = min(N, K), max(N, K)
+N, K = 3, 20
+job = [1, -1, N]  # 연산작업 +1, -1, *2
+visit = [False] * 100001
+D = [0] * 100001  # 연산 횟수, 거리
+print(bfs(N))

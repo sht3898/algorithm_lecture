@@ -1,4 +1,4 @@
-import sys; sys.stdin = open('4875_input.txt', 'r')
+import sys; sys.stdin = open('5105_input.txt', 'r')
 
 sx = sy = ex = ey = 0
 
