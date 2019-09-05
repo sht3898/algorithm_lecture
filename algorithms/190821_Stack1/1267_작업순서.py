@@ -11,7 +11,6 @@ for test_case in range(1, 11):
     G = [[] for i in range(V + 1)]
     in_degree = [0] * (V + 1)
 
-
     arr = list(map(int, input().split()))
     for i in range(0, E):
         u, v = arr[i * 2], arr[i * 2 + 1]

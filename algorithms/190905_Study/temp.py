@@ -1,11 +1,7 @@
 import sys; sys.stdin = open('5432_input.txt', 'r')
 
 
-T = int(input())
-
-for TC in range(1, T+1):
-    arr = input()
-
+def solution(arr):
     ans = 0
     stick = 0
     last = 0
@@ -22,5 +18,13 @@ for TC in range(1, T+1):
             else:
                 stick -= 1
                 ans += 1
+    return ans
+
+
+T = int(input())
+
+for TC in range(1, T+1):
+    arr = input()
     print('#{}'.format(TC), end=' ')
-    print(ans)
+    print('-'.join(arr))
+    print(solution(arr))
