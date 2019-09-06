@@ -11,7 +11,7 @@ def bfs(x, y):
     q.append((x, y))    # q에 시작 좌표를 저장
     visited[x][y] = 1   # 시작 좌표를 방문 표시
     while q:    # q에 원소가 존재하는 동안 반복
-        start_x, start_y = q.popleft()      # q의 첫번째 원소를 pop 하여  
+        start_x, start_y = q.popleft()      # q의 첫번째 원소를 pop 하여
         for i in range(4):      # 네 방향을 반복하며 경로가 있나 탐색
             nx, ny = start_x + dx[i], start_y + dy[i]   
             if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and (arr[nx][ny] == 0 or arr[nx][ny] == 3):
