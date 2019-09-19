@@ -1,1 +1,1 @@
-print('14', 3)
+print(int('u', 32))
