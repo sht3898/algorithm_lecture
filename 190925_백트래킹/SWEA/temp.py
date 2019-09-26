@@ -2,10 +2,10 @@ import sys; sys.stdin = open('5186_input.txt', 'r')
 
 for TC in range(1, int(input())+1):
     N = float(input())
-    result = ''
     cnt = 0
+    result = ''
     while True:
-        next_num = 2 * N
+        next_num = N * 2
         result += str(int(next_num))
         N = next_num - int(next_num)
         cnt += 1
