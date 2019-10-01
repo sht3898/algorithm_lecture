@@ -16,7 +16,7 @@ for TC in range(1, int(input())+1):
     result.append(works[0]) # 결과에 저장
     while True:     # 조건 반복
         for i in range(N):  # N만큼 반복하면서
-            if result[-1][-1] > works[i][0]:    # 저장된 마지막 작업의 끝나는 시간이 현재 작업의 시작 시간보다 크면 
+            if result[-1][-1] > works[i][0]:    # 저장된 마지막 작업의 끝나는 시간이 현재 작업의 시작 시간보다 크면
                 visited[i] = 1  # visited[i]를 방문으로 바꿈
         if 0 not in visited:    # 모든 작업을 끝냈으면 종료
             break
@@ -25,8 +25,8 @@ for TC in range(1, int(input())+1):
         value = 0xfffffff
         for i in range(N):  # N 만큼 반복하면서
             if visited[i] == 0 and result[-1][-1] <= works[i][0] and works[i][1] < value:
-                # 방문하지 않았고, 저장된 마지막 작업의 끝나는 시간보다 현재 작업의 시간 시간이 크고, 현재 작업의 끝나는 시간이 value 보다 작을때 
-                index = i   # index 를 i로 설정 
+                # 방문하지 않았고, 저장된 마지막 작업의 끝나는 시간보다 현재 작업의 시간 시간이 크고, 현재 작업의 끝나는 시간이 value 보다 작을때
+                index = i   # index 를 i로 설정
                 value = works[i][0]  # value 는 현재 작업의 시작 시간으로 바꿈
 
         result.append(works[index])
