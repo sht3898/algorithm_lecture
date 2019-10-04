@@ -13,10 +13,9 @@ for TC in range(1, int(input())+1):
             one.append(arr[i])
             one.sort()
             one_set = set(one)
-            for j in range(0, len(one)-2):
-                if one[j+1] - one[j] == 1:
-                    one_cnt += 1
-                if one_cnt >= 3:
+            one_set = list(one_set)
+            for j in range(0, len(one_set)-2):
+                if one_set[j+2] - one_set[j+1] == 1 and one_set[j+1] - one_set[j] == 1:
                     ans = 1
                     break
             for k in one_set:
@@ -27,10 +26,9 @@ for TC in range(1, int(input())+1):
             two.append(arr[i])
             two.sort()
             two_set = set(two)
-            for j in range(0, len(two) - 2):
-                if two[j + 1] - two[j] == 1:
-                    two_cnt += 1
-                if two_cnt >= 3:
+            two_set = list(two_set)
+            for j in range(0, len(two_set)-2):
+                if two_set[j + 2] - two_set[j + 1] == 1 and two_set[j + 1] - two_set[j] == 1:
                     ans = 2
                     break
             for k in two_set:
