@@ -6,7 +6,12 @@ dy = [1, -1, 0, 0]
 
 
 def solve(x, y):
-    global cnt
+    global cnt, ans, final
+    if ans > cnt:
+        return
+    if ans < cnt:
+        ans = cnt
+        final = arr[x][y]
     visit[x][y] = 1
     cnt += 1
     for i in range(4):
@@ -20,9 +25,9 @@ for TC in range(1, int(input())+1):
     arr = [list(map(int, input().split())) for _ in range(N)]
     visit = [[0] * N for _ in range(N)]
     ans = 0
+    final = 0
     for i in range(N):
         for j in range(N):
             cnt = 0
             solve(i, j)
-            ans = max(cnt, ans)
-    print('#{} {}'.format(TC, ans))
+    print('#{} {} {}'.format(TC, final, ans))
